@@ -1,0 +1,18 @@
+
+  // R = S1 * 1 + S2 * 2 + S3 * 4 * S4 * 8 + S5 * 16;
+  ReadSensors();
+  Serial.println(R);
+  if ( R == 4 ) // 00100 -> forward
+    Motors(Speed, Speed);
+  else if ( R == 12 || R == 8 ) //00010 or 00110 -> some what left
+    Motors(Speed, Speed - 30);  
+  else if ( R == 24 )  // 00011 -> left
+    Motors(Speed, 0);
+  else if ( R == 16 || R == 28 || R == 30 )  //00001 or  00111 or 01111 ->left
+    Motors(Speed, -Speed);
+  else if ( R == 6 || R == 2 ) // 01100 or 01000 -> some what right
+    Motors(Speed - 30, Speed); 
+  else if ( R == 3 ) //11000 ->right
+    Motors(0, Speed);
+  else if ( R == 7 || R == 1 || R == 15 ) //11100 or 10000 or 11110 -> right
+    Motors(-Speed, Speed);
